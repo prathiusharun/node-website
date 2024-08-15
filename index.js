@@ -6,4 +6,9 @@ const app = express; //initialized app to express
 
 const users = [];  //in-memory user storage
 
+// post route for registration of a new user
 
+app.post('/register', function(req,res) {
+    const {username,password}  = req.body;
+    const password = 
+})
