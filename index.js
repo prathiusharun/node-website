@@ -10,5 +10,5 @@ const users = [];  //in-memory user storage
 
 app.post('/register', function(req,res) {  //added a post route
     const {username,password}  = req.body; //req.body to receive body of req
-    const password =     
+    const password =      //assigning password
 })
