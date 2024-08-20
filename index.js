@@ -4,7 +4,7 @@ const bcrypt = require('bcryptjs');// Importing bcrypt for hashing
 
 const app = express; //initialized app to express
 
-const users = [];  //in-memory user storage
+const users = [];  //in-memory user storage, database is not used in this. 
 
 // post route for registration of a new user
 
