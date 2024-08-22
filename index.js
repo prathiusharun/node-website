@@ -8,7 +8,7 @@ const users = [];  //in-memory user storage, database is not used in this.
 
 // post route for registration of a new user
 
-app.post('/register', function(req,res) {  //added a post route
+app.post('/register', function(req,res) {  //added a post route with register as the url
     const {username,password}  = req.body; //req.body to receive body of req
     const password = bcrpt.     //assigning password, 
 
