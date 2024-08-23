@@ -14,3 +14,6 @@ app.post('/register', function(req,res) {  //added a post route with register as
 
 
 })
+
+
+app.listen(3000); 
