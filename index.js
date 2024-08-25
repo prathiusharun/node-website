@@ -15,7 +15,9 @@ const recipes = [
 app.get('/suggest', function(req,res) {
     res.send("Hello world");
     console.log("suggest is running");
-    const userIngredients = req.query.ingredients.split(',');
+    const userIngredients = req.query.ingredients;
+
+    console.log("query parameters", req.query);
 
     console.log("ingredients received");
 
