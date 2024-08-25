@@ -2,7 +2,7 @@ const express = require('express'); //Importing express to create servers and ro
 const jwt =require('jsonwebtoken'); //Importing json for token generation and verification
 const bcrypt = require('bcryptjs');// Importing bcrypt for hashing 
 
-const app = express; //initialized app to express
+const app = express(); //initialized app to express
 
 const users = [];  //in-memory user storage, database is not used in this. 
 
@@ -10,7 +10,7 @@ const users = [];  //in-memory user storage, database is not used in this.
 
 app.get('/', function(req,res) {
     res.send("Hello world");
-})
+});
 
 
 
