@@ -1,48 +1,103 @@
-const express = require('express'); //Importing express to create servers and routes
-const jwt =require('jsonwebtoken'); //Importing json for token generation and verification
-const bcrypt = require('bcryptjs');// Importing bcrypt for hashing 
+// const express = require('express'); //Importing express to create servers and routes
+// const jwt =require('jsonwebtoken'); //Importing json for token generation and verification
+// const bcrypt = require('bcryptjs');// Importing bcrypt for hashing 
 
-const app = express(); //initialized app to express
+// const app = express(); //initialized app to express
 
-app.use(express.static('public'));
+// app.use(express.static('public'));
 
+// const recipes = [
+//     {name:"salad", ingredients:["lettuce","tomato","cucumber"] },
+//     {name:"Fruit Smoothie", ingredients: ["banana","strawberry", "yogurt"]},
+//     {name:"Omelette", ingredients: ["eggs","onions","tomato"]}
+// ];
+
+// app.get('/suggest', function(req,res) {
+//     res.send("Hello world");
+//     console.log("suggest is running");
+//     const userIngredients = req.query.ingredients;
+
+//     console.log("query parameters", req.query);
+
+//     console.log("ingredients received");
+
+//     if (!userIngredients) {
+//         return res.status(400).json({ error: 'No ingredients provided' });
+//     }
+    
+//     const ingredientsArray = userIngredients.split(',').map(ingredient => ingredientsArray.includes(ingredient));
+//     console.log('Parsed ingredients:',ingredientsArray);
+
+//     const suggestions = recipes.filter(recipe => {
+//         if (!recipe.ingredients){
+//             return false
+//         }
+
+//        return recipes.ingredients.every(ingredient =>userIngredients.includes(ingredient))
+//     });
+
+//         console.log("Suggested recipes", suggestions);
+//         if(suggestions.length === 0){
+//             console.log("No recipes match the provided ingredients");
+//             return res.status(200).json({message:"No recipes found"});
+//         }
+
+//         res.json(suggestions);
+
+// });
+
+// app.listen(3000);  
+const express = require('express');
+const app = express();
+const PORT = process.env.PORT || 3000;
+
+// Mock data: List of recipes with their ingredients
 const recipes = [
-    {name:"salad", ingredients:["lettuce","tomato","cucumber"] },
-    {name:"Fruit Smoothie", ingredients: ["banana","strawberry", "yogurt"]},
-    {name:"Omelette", ingredients: ["eggs","onions","tomato"]}
+    { name: "Salad", ingredients: ["lettuce", "tomato", "cucumber"] },
+    { name: "Fruit Smoothie", ingredients: ["banana", "strawberry", "yogurt"] },
+    { name: "Omelette", ingredients: ["egg", "cheese", "bell pepper"] }
 ];
 
-app.get('/suggest', function(req,res) {
-    res.send("Hello world");
-    console.log("suggest is running");
+// Serve static files from the "public" directory
+app.use(express.static('public'));
+
+// Endpoint to suggest recipes
+app.get('/suggest', (req, res) => {
+    console.log('Query parameters', req.query);
+
     const userIngredients = req.query.ingredients;
-
-    console.log("query parameters", req.query);
-
-    console.log("ingredients received");
+    console.log('ingredients received');
 
     if (!userIngredients) {
+        console.log('No ingredients provided');
         return res.status(400).json({ error: 'No ingredients provided' });
     }
-    
-    const ingredientsArray = userIngredients.split(',').map(ingredient => ingredientsArray.includes(ingredient));
 
+    // Define ingredientsArray before using it (Line 28)
+    const ingredientsArray = userIngredients.split(',').map(ingredient => ingredient.trim());
+    console.log('Parsed ingredients:', ingredientsArray);
+
+    // Ensure the filtering logic is executed after defining ingredientsArray
     const suggestions = recipes.filter(recipe => {
-        if (!recipe.ingredients){
-            return false
+        if (!recipe.ingredients) {
+            return false;
         }
-
-       return recipes.ingredients.every(ingredient =>userIngredients.includes(ingredient))
+        // Using the ingredientsArray here (Line 34)
+        return recipe.ingredients.every(ingredient => ingredientsArray.includes(ingredient));
     });
 
-        console.log("Suggested recipes", suggestions);
-        if(suggestions.length === 0){
-            console.log("No recipes match the provided ingredients");
-            return res.status(200).json({message:"No recipes found"});
-        }
+    console.log('Suggested recipes:', suggestions);
+    
+    if (suggestions.length === 0) {
+        console.log('No recipes match the provided ingredients.');
+        return res.status(200).json({ message: 'No recipes found' });
+    }
 
-        res.json(suggestions);
-
+    res.json(suggestions);
 });
 
-app.listen(3000);  
+// Start the server
+app.listen(PORT, () => {
+    console.log(`Server is running on http://localhost:${PORT}`);
+});
+
