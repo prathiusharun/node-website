@@ -25,9 +25,22 @@ app.get('/suggest', function(req,res) {
         return res.status(400).json({ error: 'No ingredients provided' });
     }
     
-    const suggestions = recipes.filter(recipe =>
-        recipes.ingredients.every(ingredient =>userIngredients.includes(ingredient))
-    );
+    const ingredientsArray = userIngredients.split(',').map(ingredient => ingredientsArray.includes(ingredient));
+
+    const suggestions = recipes.filter(recipe => {
+        if (!recipe.ingredients){
+            return false
+        }
+
+       return recipes.ingredients.every(ingredient =>userIngredients.includes(ingredient))
+    });
+
+        console.log("Suggested recipes", suggestions);
+        if(suggestions.length === 0){
+            console.log("No recipes match the provided ingredients");
+            return res.status(200).json({message:"No recipes found"});
+        }
+
         res.json(suggestions);
 
 });
