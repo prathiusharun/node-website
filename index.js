@@ -20,6 +20,12 @@ const recipes = [
 app.get('/suggest', function(req,res) {
     res.send("Hello world");
     console.log("suggest is running");
+    const userIngredients = req.query.ingredients.split(',');
+    const suggestions = recipes.(filter =>
+        recipes.ingredients.every(ingredients =>userIngredients.includes(ingredient))
+    );
+        res.json(suggestions);
+
 });
 
 // app.get('/about', function(req,res){
