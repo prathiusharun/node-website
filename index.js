@@ -15,11 +15,14 @@ const recipes = [
 app.get('/suggest', function(req,res) {
     res.send("Hello world");
     console.log("suggest is running");
+    const userIngredients = req.query.ingredients.split(',');
+
+    console.log("ingredients received");
 
     if (!userIngredients) {
         return res.status(400).json({ error: 'No ingredients provided' });
     }
-    const userIngredients = req.query.ingredients.split(',');
+    
     const suggestions = recipes.filter(recipe =>
         recipes.ingredients.every(ingredients =>userIngredients.includes(ingredient))
     );
