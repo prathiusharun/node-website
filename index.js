@@ -8,19 +8,29 @@ const users = [];  //in-memory user storage, database is not used in this.
 
 // post route for registration of a new user
 
-app.get('/', function(req,res) {
+app.use(express.static('public'));
+
+
+const recipes = [
+    {name:"salad", ingredients:["lettuce","tomato","cucumber"] },
+    {name:"Fruit Smoothie", ingredients: ["banana","strawberry", "yogurt"]},
+    {name:"Omelette", ingredients: ["eggs","onions","tomato"]}
+];
+
+app.get('/suggest', function(req,res) {
     res.send("Hello world");
+    console.log("suggest is running");
 });
 
-app.get('/about', function(req,res){
-    res.send("This is the about page");
+// app.get('/about', function(req,res){
+//     res.send("This is the about page");
 
-});
+// });
 
-app.get('/contact', function(req,res){
-    res.send("This is the contact page");
+// app.get('/contact', function(req,res){
+//     res.send("This is the contact page");
 
-});
+// });
 
 
 
@@ -30,5 +40,7 @@ app.get('/contact', function(req,res){
 
 
 // })
+
+
 
 app.listen(3000);  //listening to port 3000
