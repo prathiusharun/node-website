@@ -12,6 +12,11 @@ app.get('/', function(req,res) {
     res.send("Hello world");
 });
 
+app.get('/about', function(req,res){
+    res.send("This is the about page");
+
+});
+
 
 
 // app.post('/register', function(req,res) {  //added a post route with register as the url
