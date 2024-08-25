@@ -34,7 +34,7 @@ app.get('/suggest', (req, res) => {
             return false;
         }
         // Using the ingredientsArray here (Line 34)
-        return recipe.ingredients.every(ingredient => ingredientsArray.includes(ingredient));
+        return recipe.ingredients.some(ingredient => ingredientsArray.includes(ingredient));
     });
 
     console.log('Suggested recipes:', suggestions);
