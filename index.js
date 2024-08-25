@@ -26,7 +26,7 @@ app.get('/suggest', function(req,res) {
     }
     
     const suggestions = recipes.filter(recipe =>
-        recipes.ingredients.every(ingredients =>userIngredients.includes(ingredient))
+        recipes.ingredients.every(ingredient =>userIngredients.includes(ingredient))
     );
         res.json(suggestions);
 
