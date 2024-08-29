@@ -17,7 +17,7 @@ app.get('/suggest', (req, res) => {
     console.log('Query parameters', req.query);
 
     const userIngredients = req.query.ingredients;
-    console.log('ingredients received');
+    console.log('ingredients received'); // added a console log 
 
     if (!userIngredients) {
         console.log('No ingredients provided');
