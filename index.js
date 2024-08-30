@@ -13,7 +13,7 @@ const recipes = [
 app.use(express.static('public'));
 
 // Endpoint to suggest recipes
-app.get('/suggest', (req, res) => {
+app.get('/suggest', (req, res) => { // req and res as the parameters in the function
     console.log('Query parameters', req.query);
 
     const userIngredients = req.query.ingredients;
